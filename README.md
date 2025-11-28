@@ -1,1 +1,1 @@
-# WhoIsTheImpostor
+# WhoIsTheImposter
