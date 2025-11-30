@@ -1,11 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { SectionContainer } from './src/components/SectionContainer/SectionContainer'
 
 export default function Home() {
   return (
     <View style={styles.container}>
-      <Text>You are very gay</Text>
-      <StatusBar style="auto" />
+      <View><Text>Gear Icon</Text></View>
+      <View>
+        <Text>IMPOSTER WHO?</Text>
+      </View>
+      <View>
+        {/* Card Players */}
+      </View>
+      <View>
+        {/* Card Categories */}
+      </View>
+      <View>
+          {/* Imposters */}
+      </View>
     </View>
   );
 }
@@ -13,8 +24,8 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#efefef',
+    paddingHorizontal: 20, // optional: global side padding
+    paddingVertical: 20,   // optional: global top/bottom padding
   },
 });
