@@ -1,8 +1,15 @@
-import { StyleSheet, Text, View} from "react-native"
+import {View} from "react-native"
 import { styles } from "./Styles"
+import { ReactNode } from "react";
 
-export default function SectionContainer() {
+interface SectionContainerProps {
+    children: ReactNode
+}
+
+export default function SectionContainer({ children }: SectionContainerProps) {
     return(
-        <View></View>
-    )
+        <View style={styles.container}>
+            {children}
+        </View>
+    );
 }
