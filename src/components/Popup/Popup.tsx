@@ -59,7 +59,7 @@ export default function Popup({ visible, onClose, children }: PopupProps) {
           {children}
 
           <TouchableOpacity style={styles.closeBtn} onPress={onClose}>
-            <Text style={styles.closeText}>Close</Text>
+            <Text style={styles.closeText}>Confirm</Text>
           </TouchableOpacity>
 
         </Animated.View>

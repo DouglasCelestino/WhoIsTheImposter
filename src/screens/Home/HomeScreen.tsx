@@ -2,15 +2,18 @@ import { Image, Text, View, TouchableOpacity } from 'react-native';
 import SectionContainer from '@components/SectionContainer/SectionContainer';
 import Item from '@components/Item/Item';
 import Popup from '@components/Popup/Popup';
+import Content from '@components/PopupPlayersContent/Content';
 import { styles } from './Styles';
 import { useState } from 'react';
 
-export default function Home() {
-  const [isVisible, setIsVisible] = useState(true);
-  const [title, setTitle] = useState('')
+type PopupType = "Players" | "Categories" | "Imposter" | null;
 
-  function openPopup(newTitle: string) {
-    setTitle(newTitle)
+export default function Home() {
+  const [popupType, setPopupType] = useState<PopupType>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  function openPopup(popupContent: PopupType) {
+    setPopupType(popupContent);
     setIsVisible(true); 
   }
 
@@ -18,12 +21,24 @@ export default function Home() {
     setIsVisible(false);
   }
 
+  function renderPopup() {
+    if (popupType === 'Players'){
+      return(<Content></Content>);
+    }
+
+    if (popupType == 'Categories'){
+
+    }
+    if (popupType == 'Imposter') {
+
+    }  
+  }
+
   return (
     <View style={styles.container}>
 
       <View style={styles.topBar}>
         <View style={{ width: 40, height: 40 }} />
-        
         <View style={styles.titleWrapper}>
           <Text style={styles.titleTop}>IMPOSTER</Text>
           <Text style={styles.titleBottom}>WHO?</Text>
@@ -49,7 +64,7 @@ export default function Home() {
               <Item>
                   <Text>Player</Text>
               </Item>
-              <TouchableOpacity onPress={()=> openPopup("PLAYERS")}><Text style={styles.buttonText}>{'>'}</Text></TouchableOpacity>
+              <TouchableOpacity onPress={()=> openPopup("Players")}><Text style={styles.buttonText}>{'>'}</Text></TouchableOpacity>
           </View>
         </SectionContainer>
       </View>
@@ -71,7 +86,7 @@ export default function Home() {
               </Item>
             </View>
             <View>
-              <TouchableOpacity onPress={()=> openPopup("CATEGORIES")}>
+              <TouchableOpacity onPress={()=> openPopup("Categories")}>
                   <Text style={styles.buttonText}>{'>'}</Text>
               </TouchableOpacity>
             </View>
@@ -85,7 +100,7 @@ export default function Home() {
             <Text style={styles.subTitleText}>IMPOSTERS</Text>
             <View style={styles.imposterSection}>
               <Text>1 Imposter</Text>
-              <TouchableOpacity onPress={()=> openPopup("IMPOSTERS")}>
+              <TouchableOpacity onPress={()=> openPopup("Imposter")}>
                   <Text style={styles.buttonText}>{'>'}</Text>
               </TouchableOpacity>
             </View>
@@ -93,7 +108,7 @@ export default function Home() {
       </View>
     
     <Popup visible={isVisible} onClose={closePopup}>
-      <Text style={{ fontSize: 22, marginBottom: 20 }}>{title}</Text>
+        {renderPopup()}
     </Popup>
 
     </View>
