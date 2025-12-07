@@ -1,17 +1,27 @@
-import { View, Text, TextInput } from "react-native";
+import { View, Image, TextInput } from "react-native";
 import { useState } from "react";
 import { styles } from "./Styles";
 
-export default function PlayerInput() {
-    const [text, onChangeText] = useState('Useless Text');
+interface PlayerInputProps {
+  PlayerName: string,
+  onChange: (newName: string) => void;
+}
 
-    return(
-        <View style={styles.container}>
-            <TextInput
-                style={styles.input}
-                onChangeText={onChangeText}
-                value={text}
-            />
-        </View>
-    );
+export default function PlayerInput(props: PlayerInputProps) {
+  return (
+    <View style={styles.inputWrapper}>
+      <Image 
+        source={require("@assets/pencil.png")}
+        style={styles.icon}
+      />
+
+      <TextInput
+        style={styles.input}
+        value={props.PlayerName}
+        onChangeText={props.onChange}
+        placeholder="Player name"
+        placeholderTextColor="#999"
+      />
+    </View>
+  );
 }

@@ -13,7 +13,6 @@ export const styles = StyleSheet.create({
     height: "70%",
     backgroundColor: "#fff",
     borderRadius: 12,
-    padding: 20,
     alignItems: "center",
     elevation: 6,                          // Android shadow
     shadowColor: "#000",                   // iOS shadow

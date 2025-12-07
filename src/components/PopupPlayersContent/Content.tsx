@@ -1,8 +1,22 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import { styles } from "./Styles";
+import { View, ScrollView, Text, TouchableOpacity } from "react-native";
 import PlayerInput from "@components/PlayerInput/PlayerInput"
+import { useState } from "react";
+import { usePlayers } from "@hooks/usePlayers";
+import { styles } from "./Styles";
 
-export default function Content() {
+
+interface ContentPlayerProps {
+    players: string[];
+    renamePlayer: (index: number, newName: string) => void;
+    removePlayer: (index: number) => void;
+    addPlayer: (name: string) => void;
+    loading: boolean;
+}
+
+
+export default function ContentPlayer(props: ContentPlayerProps) {
+    const [newPlayerName, setNewPlayerName] = useState("");
+
     return(
         <View style={styles.container}>
             <View style={styles.PlayersFooter}>
@@ -11,21 +25,35 @@ export default function Content() {
                 <Text>Tap a name to edit</Text>
             </View>
             
-            <View>
-                <View style={styles.PlayerSection}>
-                    <PlayerInput/>
-                    <TouchableOpacity style={styles.ButtonClose}><Text style={styles.ButtonCloseText}>X</Text></TouchableOpacity>
-                </View>
-                <View style={styles.PlayerSection}>
-                    <PlayerInput/>
-                    <TouchableOpacity style={styles.ButtonClose}><Text style={styles.ButtonCloseText}>X</Text></TouchableOpacity>
-                </View>
-                <View style={styles.PlayerSection}>
-                    <PlayerInput/>
-                    <TouchableOpacity style={styles.ButtonClose}><Text style={styles.ButtonCloseText}>X</Text></TouchableOpacity>
-                </View>
-            </View>
+            <ScrollView style={styles.PlayerSectionContainer}>
+                {props.players.map((name, index) => (
+                    <View style={styles.PlayerSection}>
+                        <PlayerInput 
+                            PlayerName={name}
+                            onChange={(newName) => props.renamePlayer(index, newName)}
+                        />
+                        <TouchableOpacity onPress={() => props.removePlayer(index)} style={styles.ButtonClose}><Text style={styles.ButtonCloseText}>X</Text></TouchableOpacity>
+                    </View>
+                ))}
+            </ScrollView>
 
+            <View style={styles.PlayerSection}>
+                <PlayerInput 
+                    PlayerName={newPlayerName}
+                    onChange={setNewPlayerName}
+                />
+                <TouchableOpacity 
+                    onPress={() => {
+                        if (newPlayerName.trim().length > 0) {
+                        props.addPlayer(newPlayerName);
+                        setNewPlayerName("");
+                        }
+                    }}
+                    style={styles.ButtonAdd}
+                    >
+                    <Text style={styles.ButtonAddText}>+</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }

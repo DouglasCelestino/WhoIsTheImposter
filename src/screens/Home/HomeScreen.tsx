@@ -2,13 +2,16 @@ import { Image, Text, View, TouchableOpacity } from 'react-native';
 import SectionContainer from '@components/SectionContainer/SectionContainer';
 import Item from '@components/Item/Item';
 import Popup from '@components/Popup/Popup';
-import Content from '@components/PopupPlayersContent/Content';
+import ContentPlayer from '@components/PopupPlayersContent/Content';
+import ContentCategories from '@components/PopupCategoriesContent/Content';
+import { usePlayers } from '@hooks/usePlayers';
 import { styles } from './Styles';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 type PopupType = "Players" | "Categories" | "Imposter" | null;
 
 export default function Home() {
+  const { players, renamePlayer, removePlayer, addPlayer, loading } = usePlayers();
   const [popupType, setPopupType] = useState<PopupType>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -23,11 +26,16 @@ export default function Home() {
 
   function renderPopup() {
     if (popupType === 'Players'){
-      return(<Content></Content>);
+      return(<ContentPlayer
+      players={players}
+      renamePlayer={renamePlayer}
+      removePlayer={removePlayer}
+      addPlayer={addPlayer}
+      loading={loading}></ContentPlayer>);
     }
 
     if (popupType == 'Categories'){
-
+        return(<ContentCategories></ContentCategories>)
     }
     if (popupType == 'Imposter') {
 
@@ -38,7 +46,12 @@ export default function Home() {
     <View style={styles.container}>
 
       <View style={styles.topBar}>
-        <View style={{ width: 40, height: 40 }} />
+        <View>
+          <TouchableOpacity style={styles.gearButtonCircle}>
+            <Image source={require('@assets/question_mark_icon.png')} style={styles.icon} alt='question mark icon'></Image>
+          </TouchableOpacity >
+        </View>
+
         <View style={styles.titleWrapper}>
           <Text style={styles.titleTop}>IMPOSTER</Text>
           <Text style={styles.titleBottom}>WHO?</Text>
@@ -55,15 +68,11 @@ export default function Home() {
         <SectionContainer>
           <Text style={styles.playerTitle}>PLAYERS</Text>
           <View style={styles.playersSection}>
-              <Item>
-                  <Text>Player</Text>
-              </Item>
-              <Item>
-                  <Text>Player</Text>
-              </Item>
-              <Item>
-                  <Text>Player</Text>
-              </Item>
+              {players.slice(0, 3).map((name, index) => (
+                  <Item>
+                    <Text>{name}</Text>
+                  </Item>
+                ))}
               <TouchableOpacity onPress={()=> openPopup("Players")}><Text style={styles.buttonText}>{'>'}</Text></TouchableOpacity>
           </View>
         </SectionContainer>
@@ -93,7 +102,6 @@ export default function Home() {
           </View>
         </SectionContainer>
       </View>
-
 
       <View>
         <SectionContainer>
