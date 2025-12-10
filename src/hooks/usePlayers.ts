@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getPlayers, savePlayers } from "../services/playersStorage";
+import { getPlayers, savePlayers } from "@services/playersStorage";
 
 const defaultPlayers = [
     "DØ",
@@ -17,7 +17,7 @@ const defaultPlayers = [
 
 export function usePlayers() {
   const [players, setPlayers] = useState<string[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loadingPlayers, setLoading] = useState(true);
 
   useEffect(() => {
     load();
@@ -63,6 +63,6 @@ export function usePlayers() {
     removePlayer,
     renamePlayer,
     countPlayers,
-    loading
+    loadingPlayers
   };
 }

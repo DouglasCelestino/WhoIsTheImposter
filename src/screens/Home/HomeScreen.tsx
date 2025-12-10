@@ -6,13 +6,15 @@ import ContentPlayer from '@components/PopupPlayersContent/Content';
 import ContentCategories from '@components/PopupCategoriesContent/Content';
 import ContentImposter from '@components/PopupImposterContent/Content'
 import { usePlayers } from '@hooks/usePlayers';
+import { useCategories } from "@hooks/useCategories";
 import { styles } from './Styles';
 import { useState, useEffect } from 'react';
 
 type PopupType = "Players" | "Categories" | "Imposter" | null;
 
 export default function Home() {
-  const { players, renamePlayer, removePlayer, addPlayer, loading } = usePlayers();
+  const { players, renamePlayer, removePlayer, addPlayer, loadingPlayers } = usePlayers();
+  const {categories, categoriesSelected, addCategorie, removeCategorie, loadingCategories} = useCategories();
   const [popupType, setPopupType] = useState<PopupType>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -32,11 +34,15 @@ export default function Home() {
       renamePlayer={renamePlayer}
       removePlayer={removePlayer}
       addPlayer={addPlayer}
-      loading={loading}></ContentPlayer>);
+      loading={loadingPlayers}></ContentPlayer>);
     }
 
     if (popupType == 'Categories'){
-        return(<ContentCategories></ContentCategories>);
+        return(<ContentCategories
+        categories={categories}
+        categoriesSelected={categoriesSelected}
+        addCategorie={addCategorie}
+        removeCategorie={removeCategorie}></ContentCategories>);
     }
     if (popupType == 'Imposter') {
         return(<ContentImposter></ContentImposter>);

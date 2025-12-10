@@ -1,45 +1,37 @@
 import { View,ScrollView, Text } from "react-native";
 import SelectCategories from "@components/SelectCategories/SelectCategories"
-import { useState } from "react";
+
+interface CategoriesProps {
+    categories: string[];
+    categoriesSelected: string[];
+    addCategorie: (name: string) => void;
+    removeCategorie: (name: string) => void;
+}
 
 
-export default function ContentCategories() {
-    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-
-    const Categories = [
-        "Everyday Objects",
-        "Players Name",
-        "Animals",
-        "Foods & Drinks",
-        "Colors & Shapes",
-        "Country & Cities",
-        "Emotions & Feelings",
-        "Hobbies & Activities",
-    ];
-
+export default function ContentCategories(props: CategoriesProps) {
     function toggleCategory(name: string) {
-        if (selectedCategories.includes(name)) {
-        // remove
-        setSelectedCategories(selectedCategories.filter(item => item !== name));
+        if (props.categoriesSelected.includes(name)) {
+            props.removeCategorie(name);
         } else {
-        // add
-        setSelectedCategories([...selectedCategories, name]);
+            props.addCategorie(name);
         }
     }
-    
+
     return(
         <ScrollView>
             <View>
                 <Text>SELECT CATEGORIES</Text>
-                <Text>Choose one  or more categories for the game</Text>
+                <Text>Choose one or more categories for the game</Text>
             </View>
+
             <ScrollView>
-                {Categories.map(category => (
+                {props.categories.map(category => (
                     <SelectCategories
-                    key={category}
-                    Title={category}
-                    Selected={selectedCategories.includes(category)}  
-                    changeSelect={() => toggleCategory(category)}  
+                        key={category}
+                        Title={category}
+                        Selected={props.categoriesSelected.includes(category)}
+                        changeSelect={() => toggleCategory(category)}
                     />
                 ))}
             </ScrollView>

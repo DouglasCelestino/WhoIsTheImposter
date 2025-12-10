@@ -1,7 +1,6 @@
 import { View, ScrollView, Text, TouchableOpacity } from "react-native";
 import PlayerInput from "@components/PlayerInput/PlayerInput"
 import { useState } from "react";
-import { usePlayers } from "@hooks/usePlayers";
 import { styles } from "./Styles";
 
 

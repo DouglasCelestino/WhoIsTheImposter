@@ -26,24 +26,27 @@ function generate_imposter(num_players: number): ImposterRule | null {
 }
 
 export default function ImposterContent() {
-    const { countPlayers, loading } = usePlayers();
+    const { countPlayers, loadingPlayers } = usePlayers();
     const [imposterRules, setImposterRules] = useState<ImposterRule | null>(null);
-    const [selectedImposter, setSelectedImposter] = useState<number[]>([]);
+    const [selectedImposter, setSelectedImposter] = useState<number[]>([0]);
 
     useEffect(() => {
-    if (!loading) {
+    if (!loadingPlayers) {
         setImposterRules(generate_imposter(countPlayers()));
     }
-    }, [loading]);
+    }, [loadingPlayers]);
 
 
-    function ToggleImposters(id: number){
-        if(selectedImposter.includes(id)) {
-            setSelectedImposter(selectedImposter.filter(item => item !== id))
-        } else {
-            setSelectedImposter([...selectedImposter, id])
+    function ToggleImposters(id: number) {
+        if (selectedImposter.includes(id)) {
+            if (selectedImposter.length === 1) return;
+            setSelectedImposter(selectedImposter.filter(item => item !== id));
+        } 
+        else {
+            setSelectedImposter([...selectedImposter, id]);
         }
     }
+
 
     return(
         <View>
