@@ -4,11 +4,11 @@ import { useState } from "react";
 
 
 export default function ContentCategories() {
-    const [selected, setSelected] = useState(false);
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
     const Categories = [
         "Everyday Objects",
+        "Players Name",
         "Animals",
         "Foods & Drinks",
         "Colors & Shapes",

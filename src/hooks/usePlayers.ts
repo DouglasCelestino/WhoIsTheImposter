@@ -55,11 +55,14 @@ export function usePlayers() {
     updatePlayers(updated);
   }
 
+  const countPlayers = () => players.length
+
   return {
     players,
     addPlayer,
     removePlayer,
     renamePlayer,
+    countPlayers,
     loading
   };
 }

@@ -4,6 +4,7 @@ import Item from '@components/Item/Item';
 import Popup from '@components/Popup/Popup';
 import ContentPlayer from '@components/PopupPlayersContent/Content';
 import ContentCategories from '@components/PopupCategoriesContent/Content';
+import ContentImposter from '@components/PopupImposterContent/Content'
 import { usePlayers } from '@hooks/usePlayers';
 import { styles } from './Styles';
 import { useState, useEffect } from 'react';
@@ -35,10 +36,10 @@ export default function Home() {
     }
 
     if (popupType == 'Categories'){
-        return(<ContentCategories></ContentCategories>)
+        return(<ContentCategories></ContentCategories>);
     }
     if (popupType == 'Imposter') {
-
+        return(<ContentImposter></ContentImposter>);
     }  
   }
 
