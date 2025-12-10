@@ -1,4 +1,4 @@
-import { View, Modal, TouchableOpacity, Text, Animated } from "react-native";
+import { View, Modal, TouchableOpacity, Text, Animated, Platform } from "react-native";
 import { useEffect, useRef } from "react";
 import { ReactNode } from "react";
 import { styles } from "./Styles";
@@ -19,12 +19,12 @@ export default function Popup({ visible, onClose, children }: PopupProps) {
         Animated.timing(slideAnim, {
           toValue: 0,
           duration: 250,
-          useNativeDriver: true,
+          useNativeDriver: Platform.OS !== "web",
         }),
         Animated.timing(fadeAnim, {
           toValue: 1,
           duration: 250,
-          useNativeDriver: true,
+          useNativeDriver: Platform.OS !== "web",
         }),
       ]).start();
     } else {
@@ -32,12 +32,12 @@ export default function Popup({ visible, onClose, children }: PopupProps) {
         Animated.timing(slideAnim, {
           toValue: 200,
           duration: 200,
-          useNativeDriver: true,
+          useNativeDriver: Platform.OS !== "web",
         }),
         Animated.timing(fadeAnim, {
           toValue: 0,
           duration: 200,
-          useNativeDriver: true,
+          useNativeDriver: Platform.OS !== "web",
         }),
       ]).start();
     }

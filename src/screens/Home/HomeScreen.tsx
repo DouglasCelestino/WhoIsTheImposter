@@ -76,7 +76,7 @@ export default function Home() {
           <Text style={styles.playerTitle}>PLAYERS</Text>
           <View style={styles.playersSection}>
               {players.slice(0, 3).map((name, index) => (
-                  <Item>
+                  <Item key={index}>
                     <Text>{name}</Text>
                   </Item>
                 ))}

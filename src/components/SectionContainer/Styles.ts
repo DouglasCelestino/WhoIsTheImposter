@@ -9,10 +9,8 @@ export const styles = StyleSheet.create({
         borderRadius: 15,
         
         // iOS shadow
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.5,
+        boxShadow: "0px 2px 3px rgba(0,0,0,0.2)",
+
 
         // Android shadow
         elevation: 5,

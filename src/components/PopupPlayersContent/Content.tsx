@@ -26,7 +26,7 @@ export default function ContentPlayer(props: ContentPlayerProps) {
             
             <ScrollView style={styles.PlayerSectionContainer}>
                 {props.players.map((name, index) => (
-                    <View style={styles.PlayerSection}>
+                    <View key={index} style={styles.PlayerSection}>
                         <PlayerInput 
                             PlayerName={name}
                             onChange={(newName) => props.renamePlayer(index, newName)}

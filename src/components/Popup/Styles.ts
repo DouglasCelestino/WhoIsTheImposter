@@ -15,10 +15,7 @@ export const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: "center",
     elevation: 6,                          // Android shadow
-    shadowColor: "#000",                   // iOS shadow
-    shadowOpacity: 0.25,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
+    boxShadow: "0px 4px 8px rgba(0,0,0,0.2)",
   },
 
   closeBtn: {
